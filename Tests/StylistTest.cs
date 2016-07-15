@@ -98,7 +98,7 @@ namespace HairSalon
       TestClient2.Save();
 
       testStylist1.Delete();
-      testClient1.Delete();
+      TestClient1.Delete();
 
       List<Stylist> resultStylists = Stylist.GetAll();
       List<Stylist> testStylists = new List<Stylist> {testStylist2};
