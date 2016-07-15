@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Nancy;
 using Nancy.ViewEngines.Razor;
+using System.Linq;
 
 namespace HairSalon
 {
@@ -36,14 +37,14 @@ namespace HairSalon
         List<Client> allClients = Client.GetAll();
         return View["stylist.cshtml", allClients];
       };
-      Get["/client/{id}"] = parameters => {
-        Dictionary<string, object> Model = new Dictionary<string, object>();
-        var foundClient = Client.Find(parameters.id);
-        var foundStylist = Client.Find(foundStylist.GetClient());
-        Model.Add("client", foundClient);
-        Model.Add("stylist", foundStylist);
-        return View["stylist.cshtml", Model];
-      };
+      // Get["client/{id}"] = parameters => {
+      //   Dictionary<string, object> Model = new Dictionary<string, object>();
+      //   var foundClient = Client.Find(parameters.id);
+      //   var foundStylist = Stylist.Find(foundStylist.GetId());
+      //   Model.Add("client", foundClient);
+      //   Model.Add("stylist", foundStylist);
+      //   return View["stylist.cshtml", Model];
+      // };
     }
   }
 }
