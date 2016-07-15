@@ -30,6 +30,18 @@ namespace HairSalon
       Assert.Equal(firstStylist, secondStylist);
     }
 
+    [Fact]
+    public void Test_SaveMethod_SavesToDatabase()
+    {
+      Stylist testStylist = new Stylist("Mike");
+
+      testStylist.Save();
+      List<Stylist> result = Stylist.GetAll();
+      List<Stylist> testList = new List<Stylist>{testStylist};
+
+      Assert.Equal(testList, result);
+    }
+
     public void Dispose()
     {
       // Stylist.DeleteAll();
