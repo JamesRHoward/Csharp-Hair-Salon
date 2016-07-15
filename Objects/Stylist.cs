@@ -97,7 +97,7 @@ namespace HairSalon
         conn.Close();
       }
     }
-    public void DeleteAll()
+    public static void DeleteAll()
     {
       SqlConnection conn = DB.Connection();
       conn.Open();
