@@ -44,7 +44,7 @@ namespace HairSalon
 
     public void Dispose()
     {
-      // Client.DeleteAll();
+      Client.DeleteAll();
     }
   }
 }
