@@ -22,7 +22,7 @@ namespace HairSalon
     }
 
     [Fact]
-    public void Test_ReturnsTrueIfStylistIsTheSame()
+    public void Test_ReturnsTrueIfClientIsTheSame()
     {
       Client firstClient = new Client("Sammy");
       Client secondClient = new Client("Sammy");
@@ -40,6 +40,20 @@ namespace HairSalon
       List<Client> testList = new List<Client>{testClient};
 
       Assert.Equal(testList, result);
+    }
+
+    [Fact]
+    public void Test_SaveMethod_GivesIdToObject()
+    {
+      Client testClient = new Client("Mike");
+
+      testClient.Save();
+      Client savedClient = Client.GetAll()[0];
+
+      int restult = savedClient.GetId();
+      int testId = testClient.GetId();
+
+      Assert.Equal(testId, restult);
     }
 
     public void Dispose()
