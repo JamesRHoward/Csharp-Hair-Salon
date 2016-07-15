@@ -182,7 +182,7 @@ namespace HairSalon
       {
         int foundClientId = rdr.GetInt32(0);
         string foundClientName = rdr.GetString(1);
-        Client newClient = new Client(foundClientName, foundClientId, this.GetId());
+        Client newClient = new Client(foundClientName, foundClientId);
         clients.Add(newClient);
       }
       if (rdr != null)
