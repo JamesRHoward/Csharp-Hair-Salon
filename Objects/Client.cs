@@ -69,5 +69,32 @@ namespace HairSalon
 
       return allClients;
     }
+    public void Save()
+    {
+      SqlConnection conn = DB.Connection();
+      SqlDataReader rdr;
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("INSERT INTO clients (client) OUTPUT INSERTED.id VALUES (@clientName);", conn);
+
+      SqlParameter clientParameter = new SqlParameter();
+      clientParameter.ParameterName = "@clientName";
+      clientParameter.Value = this.GetClientName();
+      cmd.Parameters.Add(clientParameter);
+      rdr = cmd.ExecuteReader();
+
+      while(rdr.Read())
+      {
+        this._id = rdr.GetInt32(0);
+      }
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+    }
   }
 }
