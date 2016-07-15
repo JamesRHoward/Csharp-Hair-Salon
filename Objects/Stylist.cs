@@ -120,7 +120,7 @@ namespace HairSalon
         foundStylistId = rdr.GetInt32(0);
         foundStylistName = rdr.GetString(1);
       }
-      Stylist foundStylist = new Stylist(foundStylistId, foundStylistName);
+      Stylist foundStylist = new Stylist(foundStylistName, foundStylistId);
 
       if (rdr != null)
       {
