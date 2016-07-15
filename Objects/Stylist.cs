@@ -7,12 +7,12 @@ namespace HairSalon
   public class Stylist
   {
     private int _id;
-    private string _stylist;
+    private string _stylistName;
 
-    public Stylist(string stylist, int id = 0)
+    public Stylist(string stylistName, int id = 0)
     {
       _id = id;
-      _stylist = stylist;
+      _stylistName = stylistName;
     }
     public override bool Equals(System.Object otherStylist)
     {
@@ -23,7 +23,7 @@ namespace HairSalon
       else
       {
         Stylist newStylist = (Stylist) otherStylist;
-        bool stylistEquality = (this.GetStylist() == newStylist.GetStylist());
+        bool stylistEquality = (this.GetStylistName() == newStylist.GetStylistName());
         return (stylistEquality);
       }
     }
@@ -32,13 +32,13 @@ namespace HairSalon
     {
       return _id;
     }
-    public string GetStylist()
+    public string GetStylistName()
     {
-      return _stylist;
+      return _stylistName;
     }
-    public void SetStylist(string newStylist)
+    public void SetStylistName(string newStylistName)
     {
-      _stylist = newStylist;
+      _stylistName = newStylistName;
     }
     public static List<Stylist> GetAll()
     {
@@ -54,8 +54,8 @@ namespace HairSalon
       while(rdr.Read())
       {
         int stylistId = rdr.GetInt32(0);
-        string stylistStylist = rdr.GetString(1);
-        Stylist newStylist = new Stylist(stylistStylist, stylistId);
+        string stylistName = rdr.GetString(1);
+        Stylist newStylist = new Stylist(stylistName, stylistId);
         allStylists.Add(newStylist);
       }
 
@@ -69,6 +69,33 @@ namespace HairSalon
       }
 
       return allStylists;
+    }
+    public void Save()
+    {
+      SqlConnection conn = DB.Connection();
+      SqlDataReader rdr;
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("INSERT INTO stylists (stylist) OUTPUT INSERTED.id VALUES (@stylistName);", conn);
+
+      SqlParameter stylistParameter = new SqlParameter();
+      stylistParameter.ParameterName = "@stylistName";
+      stylistParameter.Value = this.GetStylistName();
+      cmd.Parameters.Add(stylistParameter);
+      rdr = cmd.ExecuteReader();
+
+      while(rdr.Read())
+      {
+        this._id = rdr.GetInt32(0);
+      }
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
     }
   }
 }
