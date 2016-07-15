@@ -11,3 +11,9 @@
     <li><a href="/stylist/@stylist.GetId()">@stylist.GetStylistName()</a></li>
   }
 </ul>
+
+<form action="/stylist/new" method="post">
+  <label for="stylist_name">Name of Hair Stylist: </label>
+  <input type="text" name="stylist_name" required autofocus="" placeholder="Enter a Stylist name">
+  <button type="submit" name="button">Submit</button>
+</form>
