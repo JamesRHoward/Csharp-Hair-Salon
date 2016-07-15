@@ -14,6 +14,19 @@ namespace HairSalon
       _id = id;
       _clientName = clientName;
     }
+    public override bool Equals(System.Object otherClient)
+    {
+      if (!(otherClient is Client))
+      {
+        return false;
+      }
+      else
+      {
+        Client newClient = (Client) otherClient;
+        bool clientEquality = (this.GetClientName() == newClient.GetClientName());
+        return (clientEquality);
+      }
+    }
     public int GetId()
     {
       return _id;
