@@ -1,19 +1,3 @@
-<h1>Hair Salon Stylist</h1>
-
-@if (Model.Count == 0)
-{
-  <p>No Hair Stylists have been added yet</p>
-}
-
-<ul>
-  @foreach (var stylist in Model)
-  {
-    <li><a href="/stylist/@stylist.GetId()">@stylist.GetStylistName()</a></li>
-  }
-</ul>
-
-<form action="/stylist/new" method="post">
-  <label for="stylist_name">Name of Hair Stylist: </label>
-  <input type="text" name="stylist_name" required autofocus="" placeholder="Enter a Stylist name">
-  <button type="submit" name="button">Submit</button>
-</form>
+<h1>HairSalon</h1>
+<h3><a href="/stylists">View Stylists</a></h3>
+<h3><a href="/clients">View Clients</a></h3>
