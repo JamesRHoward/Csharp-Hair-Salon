@@ -23,12 +23,20 @@ namespace HairSalon
       };
       Get["/clients/new"] = _ => {
         List<Stylist> allStylists = Stylist.GetAll();
-        return View["client_form.cshtml" allStylists];
+        return View["client_form.cshtml", allStylists];
       };
       Post["/clients/new"] = _ => {
-        CLient newClient = newClient(Request.Form["client_name"]);
+        Client newClient = new Client(Request.Form["client_name"]);
         newClient.Save();
         return View["succsess.cshtml"];
+      };
+      Get["/categories/{id}"] = parameters => {
+        Dictionary<string, object> model = new Dictionary<string, object>();
+        var SelectedStylist = Stylist.Find(parameters.id);
+        var stylistClients = SelectedStylist.GetClient();
+        model.Add("stylist", SelectedStylist);
+        model.Add("client", stylistClients);
+        return View["category.cshtml", model];
       };
       // Post["/stylists/new"] = _ => {
       //   Stylist newStylist = new Stylist(Request.Form["stylist_name"]);
