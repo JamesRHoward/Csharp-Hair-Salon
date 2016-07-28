@@ -8,7 +8,7 @@ else
   <ul>
     @foreach (var client in Model)
     {
-      <li><a href="clients/@client.GetId()">@client.GetClientName</a></li>
+      <li><a href="clients/@client.GetId()">@client.GetClientName()</a></li>
     }
   </ul>
 }
